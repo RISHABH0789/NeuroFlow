@@ -1,0 +1,268 @@
+:root {
+    --cyan: #22d3ee;
+    --orange: #f97316;
+    --bg-dark: #06080a;
+    --glass: rgba(255, 255, 255, 0.03);
+    --border: rgba(255, 255, 255, 0.08);
+    --text-dim: #94a3b8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: white;
+    min-height: 100vh;
+    padding-bottom: 100px;
+    overflow-x: hidden;
+}
+
+.bg-glow {
+    position: fixed;
+    top: 0; right: 0;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(34, 211, 238, 0.15) 0%, transparent 70%);
+    z-index: -1;
+}
+
+.main-workspace {
+    padding: 25px 20px;
+}
+
+/* Header */
+.console-header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.streak-info {
+    font-size: 0.9rem;
+    margin: 10px 0 15px;
+    color: var(--text-dim);
+}
+
+.orange-text { color: var(--orange); font-weight: bold; }
+
+.search-container {
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    gap: 12px;
+}
+
+.search-container input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    width: 100%;
+}
+
+/* Banner */
+.status-banner {
+    background: rgba(34, 211, 238, 0.05);
+    border: 1px solid rgba(34, 211, 238, 0.1);
+    padding: 15px;
+    border-radius: 15px;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--cyan);
+    font-size: 0.9rem;
+}
+
+/* Stats */
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: var(--glass);
+    border: 1px solid var(--border);
+    padding: 20px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.label { color: var(--text-dim); font-size: 0.8rem; }
+.val { font-size: 2.2rem; margin: 5px 0; font-weight: 800; }
+
+.level-tag {
+    background: var(--orange);
+    color: black;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+
+/* Computing state pulse */
+#efficiency-status {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0.5; }
+}
+
+/* Glass Cards */
+.glass-card {
+    background: var(--glass);
+    border: 1px solid var(--border);
+    padding: 20px;
+    border-radius: 244px;
+    margin-bottom: 20px;
+}
+
+.card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.sub-label { color: var(--text-dim); font-size: 0.75rem; font-family: monospace; }
+
+/* Form Elements */
+.task-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.glass-input, .glass-select {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    padding: 12px;
+    border-radius: 10px;
+    color: white;
+    outline: none;
+}
+
+.glass-select option { background: var(--bg-dark); }
+
+.add-btn {
+    background: var(--cyan);
+    color: black;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Session List Items (To be used by JS) */
+.session-list { list-style: none; }
+.session-list li {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+}
+
+.session-list span { width: 35px; color: var(--text-dim); }
+
+.bar-bg {
+    flex: 1;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.bar {
+    height: 100%;
+    background: var(--cyan);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(34, 211, 238, 0.3);
+    transition: width 0.5s ease-out; /* Smooth growth when JS loads */
+}
+
+/* Bottom Nav */
+.bottom-nav {
+    position: fixed;
+    bottom: 20px;
+    left: 20px; right: 20px;
+    height: 70px;
+    background: rgba(10, 12, 14, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 100;
+}
+.task-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 12px 15px;
+    border-radius: 12px;
+    margin-top: 10px;
+    border-left: 4px solid var(--text-dim);
+    transition: 0.3s;
+}
+.weekly-chart {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 120px;
+    padding: 10px 0;
+}
+
+.weekly-bar-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.bar-column {
+    width: 8px;
+    height: 60px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column-reverse;
+    overflow: hidden;
+}
+
+.bar-fill {
+    width: 100%;
+    background: var(--cyan);
+    box-shadow: 0 0 10px var(--cyan);
+    transition: height 0.5s ease;
+}
+
+.day-name { font-size: 0.65rem; margin-top: 8px; color: var(--text-dim); }
+.day-mins { font-size: 0.6rem; color: var(--orange); font-weight: bold; }
+
+.task-entry.high-priority { border-left-color: var(--orange); }
+.task-entry.med-priority { border-left-color: var(--cyan); }
+.task-entry.completed { opacity: 0.6; background: rgba(34, 211, 238, 0.05); }
+
+.nav-item { color: var(--text-dim); font-size: 1.2rem; transition: 0.3s; }
+.nav-item.active {
+    color: var(--cyan);
+    background: rgba(34, 211, 238, 0.1);
+    padding: 12px;
+    border-radius: 12px;
+}

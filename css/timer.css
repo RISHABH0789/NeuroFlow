@@ -1,0 +1,303 @@
+/* =========================================================
+   NeuroFlow Timer System
+   Futuristic OLED Focus Engine
+========================================================= */
+
+/* =========================================================
+   ROOT VARIABLES
+========================================================= */
+
+:root {
+    --black-base: #020617;
+    --dark-surface: #0f172a;
+
+    --cyan: #22d3ee;
+    --orange: #fb923c;
+    --green: #4ade80;
+
+    --text-main: #f8fafc;
+    --text-dim: #94a3b8;
+
+    --glass-bg: rgba(15, 23, 42, 0.72);
+    --glass-border: rgba(255, 255, 255, 0.08);
+
+    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --cyan-glow:
+        0 0 20px rgba(34, 211, 238, 0.25),
+        0 0 50px rgba(34, 211, 238, 0.15);
+
+    --orange-glow:
+        0 0 20px rgba(251, 146, 60, 0.25);
+
+    --shadow-heavy:
+        0 25px 60px rgba(0, 0, 0, 0.55);
+}
+
+/* =========================================================
+   GLOBAL RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================================================
+   TIMER CIRCLE ENGINE (SVG UPGRADE)
+========================================================= */
+
+.clock-face {
+    position: relative;
+    width: 340px;
+    height: 340px;
+    margin: 30px auto 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* The SVG Progress Ring */
+.progress-ring {
+    position: absolute;
+    transform: rotate(-90deg); /* Start at the top */
+    filter: drop-shadow(0 0 12px rgba(34, 211, 238, 0.3));
+    z-index: 2;
+}
+
+.progress-ring__circle {
+    transition: stroke-dashoffset 0.3s linear;
+    stroke-dasharray: 880; /* This matches the circumference */
+    stroke-dashoffset: 0;
+}
+
+.clock-inner {
+    width: 82%;
+    height: 82%;
+    border-radius: 50%;
+    background: radial-gradient(circle at top, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    z-index: 3;
+}
+
+/* =========================================================
+   PRESET & INPUT SYSTEM
+========================================================= */
+
+/* --- EXIT TO CONSOLE STYLING --- */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: var(--transition);
+}
+
+.back-link i {
+    width: 18px;
+    height: 18px;
+    color: var(--cyan);
+}
+
+.back-link:hover {
+    background: rgba(34, 211, 238, 0.05);
+    border-color: var(--cyan);
+    color: #fff;
+    box-shadow: 0 0 15px rgba(34, 211, 238, 0.2);
+    transform: translateX(-5px); /* Subtle "moving back" effect */
+}
+
+.timer-presets {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 35px;
+}
+
+.preset-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    color: var(--text-dim);
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.preset-btn:hover, .preset-btn.active {
+    background: rgba(34, 211, 238, 0.1);
+    border-color: var(--cyan);
+    color: var(--cyan);
+}
+
+.custom-input-wrap {
+    margin-bottom: 40px;
+    max-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.glass-input {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--glass-border);
+    padding: 12px;
+    border-radius: 12px;
+    color: #fff;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+}
+/* --- RESET BUTTON REDESIGN --- */
+#resetControl.secondary-button {
+    background: rgba(239, 68, 68, 0.05); /* Very subtle red tint */
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    color: #fca5a5; /* Dimmed red text */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+#resetControl.secondary-button:hover {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: #ef4444; /* Bright red border on hover */
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Icon specific color to make it pop */
+#resetControl i {
+    color: #ef4444;
+}
+
+#resetControl:active {
+    transform: scale(0.95);
+}
+/* =========================================================
+   REWARD / XP MODAL
+========================================================= */
+
+.reward-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(15px);
+    display: none; /* Toggled by JS */
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 20px;
+}
+
+.reward-content {
+    max-width: 400px;
+    width: 100%;
+    padding: 40px;
+    text-align: center;
+    border-radius: 32px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    animation: rewardPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes rewardPop {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.xp-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    background: var(--orange);
+    color: var(--black-base);
+    border-radius: 999px;
+    font-weight: 900;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    box-shadow: var(--orange-glow);
+}
+
+/* =========================================================
+   MODIFIER STATES
+========================================================= */
+
+/* State: Break (Switch colors to Orange) */
+.state-break .progress-ring__circle { stroke: var(--orange); }
+.state-break .status-tag { color: var(--orange); border-color: var(--orange); box-shadow: var(--orange-glow); }
+.state-break .timer-display { text-shadow: 0 0 20px rgba(251, 146, 60, 0.25); }
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .focus-session {
+        padding: 45px 25px;
+    }
+
+    #task-name {
+        font-size: 1.5rem;
+    }
+
+    .clock-face {
+        width: 270px;
+        height: 270px;
+    }
+
+    .timer-display {
+        font-size: 4rem;
+    }
+
+    .session-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .timer-actions {
+        flex-direction: column;
+    }
+
+    .primary-button,
+    .secondary-button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .clock-face {
+        width: 220px;
+        height: 220px;
+    }
+
+    .timer-display {
+        font-size: 3rem;
+    }
+
+    .status-tag {
+        font-size: 0.6rem;
+        letter-spacing: 2px;
+    }
+
+    #task-name {
+        font-size: 1.2rem;
+    }
+}
