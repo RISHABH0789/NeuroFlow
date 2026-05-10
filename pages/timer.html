@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroFlow | Focus Timer</title>
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/timer.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="timer-body" id="timerBody">
+
+    <div class="bg-layer">
+        <div class="glow-orb orb-cyan"></div>
+        <div class="glow-orb orb-orange"></div>
+    </div>
+
+    <nav class="timer-nav">
+        <a href="dashboard.html" class="back-link">
+            <i data-lucide="chevron-left"></i> Exit to Console
+        </a>
+    </nav>
+
+    <main class="timer-container">
+        <div class="focus-session glass-module">
+            
+           
+
+            <div class="clock-face">
+                <svg class="progress-ring" width="340" height="340">
+                    <circle class="progress-ring__bg" stroke="rgba(255,255,255,0.05)" stroke-width="10" fill="transparent" r="140" cx="170" cy="170"/>
+                    <circle id="timerProgress" class="progress-ring__circle" stroke="var(--cyan)" stroke-width="10" stroke-linecap="round" fill="transparent" r="140" cx="170" cy="170" style="stroke-dasharray: 880; stroke-dashoffset: 0;"/>
+                </svg>
+
+                <div class="clock-inner">
+                    <h1 class="timer-display" id="timeRemaining">25:00</h1>
+                    <p class="timer-subtext">Deep Work</p>
+                </div>
+            </div>
+
+            <div class="timer-presets">
+                <button class="preset-btn" onclick="timerApp.setDuration(1500)">25m</button>
+                <button class="preset-btn" onclick="timerApp.setDuration(3600)">1h</button>
+                <button class="preset-btn" onclick="timerApp.setDuration(7200)">2h</button>
+                <input type="text" id="customInput" placeholder="Custom (e.g. 45m)" class="glass-input">
+            </div>
+
+            <div class="timer-actions">
+                <button id="mainControl" class="primary-button large neon-shadow">
+                    <i data-lucide="play"></i> Start Flow
+                </button>
+                <button id="resetControl" class="secondary-button">
+                    <i data-lucide="refresh-cw"></i> Reset
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <div id="rewardOverlay" class="reward-modal">
+        <div class="reward-content glass-module">
+            <div class="xp-badge">+10 XP</div>
+            <h2>Focus Session Complete</h2>
+            <p>Your productivity has been logged to the neural database.</p>
+            <br>
+            <button onclick="closeReward()" class="primary-button">Log Session</button>
+        </div>
+    </div>
+
+    <script src="../js/storage.js"></script>
+    <script src="../js/timer.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

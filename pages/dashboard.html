@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroFlow Console</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+
+    <div class="bg-glow"></div>
+
+    <main class="main-workspace">
+        <header class="console-header">
+            <h1>Console</h1>
+            <div class="streak-info">Current Streak: <span class="orange-text" id="streak-val">-- Days</span></div>
+            
+        </header>
+
+        
+
+        <section class="stats-grid">
+            <div class="stat-card">
+                <p class="label">Total XP</p>
+                <h2 class="val" id="xp-val">0</h2>
+                <span class="level-tag" id="level-tag">LVL 1</span>
+            </div>
+
+            <div class="stat-card">
+                <p class="label">Efficiency</p>
+                <h2 class="val" id="efficiency-val">--%</h2>
+                <span class="status-tag" id="efficiency-status">Computing...</span>
+            </div>
+        </section>
+
+        <section class="glass-card">
+            <div class="card-head">
+                <h3>Active Queue</h3>
+                <span class="sub-label">CORE_SYSTEM</span>
+            </div>
+            <div class="task-form">
+                <input type="text" id="new-task-input" class="glass-input" placeholder="New objective...">
+                <select id="priority-select" class="glass-select">
+                    <option value="low">Low</option>
+                    <option value="med" selected>Med</option>
+                    <option value="high">High</option>
+                </select>
+                <button class="add-btn" id="add-task-btn"><i class="fa-solid fa-plus"></i></button>
+            </div>
+            <hr style="border: 0; border-top: 1px solid var(--border); margin: 20px 0;">
+
+          <div id="task-list-container">
+        </div>
+        </section>
+
+        
+    </main>
+    <section class="glass-card">
+    <h3>Weekly Neural Load</h3>
+    <div id="weekly-activity-container" class="weekly-chart">
+        </div>
+</section>
+
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active"><i class="fa-solid fa-table-cells-large"></i></a>
+        <a href="timer.html" class="nav-item"><i class="fa-solid fa-bolt"></i></a>
+        <a href="calendar.html" class="nav-item"><i class="fa-solid fa-calendar-days"></i></a>
+    </nav>
+    <script src="../js/storage.js"></script>
+    <script src="../js/dashboard.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- =====================================================
+         META
+    ====================================================== -->
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- =====================================================
+         TITLE
+    ====================================================== -->
+
+    <title>NeuroFlow | Schedule</title>
+
+    <!-- =====================================================
+         GLOBAL STYLES
+    ====================================================== -->
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- =====================================================
+         CALENDAR STYLES
+    ====================================================== -->
+
+    <link rel="stylesheet" href="../css/calendar.css">
+
+    <!-- =====================================================
+         GOOGLE FONTS
+    ====================================================== -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- =====================================================
+         ICONS
+    ====================================================== -->
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+</head>
+
+<body class="calendar-body">
+
+    <div class="bg-layer">
+        <div class="glow-orb orb-cyan"></div>
+        <div class="glow-orb orb-orange"></div>
+    </div>
+
+    <nav class="calendar-nav glass-module">
+        <a href="dashboard.html" class="back-btn">
+            <i data-lucide="arrow-left"></i>
+        </a>
+
+        <div class="nav-title">
+            <h2>Study <span class="accent-cyan">Log</span></h2>
+            <p class="nav-subtitle">Track your consistency and focus</p>
+        </div>
+
+        <div class="month-switcher">
+            <button class="month-btn" id="prevMonth">
+                <i data-lucide="chevron-left"></i>
+            </button>
+            <div class="month-display" id="monthDisplay">
+                </div>
+            <button class="month-btn" id="nextMonth">
+                <i data-lucide="chevron-right"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main class="calendar-container">
+        
+        <section class="glass-card calendar-card">
+        <div class="calendar-header">
+        <h2 id="currentMonth">May 2026</h2>
+        <div class="calendar-controls">
+            <button id="prevMonth"><i class="fa-solid fa-chevron-left"></i></button>
+            <button id="nextMonth"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+    
+    <div class="calendar-grid-header">
+        <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+    </div>
+    
+    <div id="calendarGrid" class="calendar-grid"></div>
+</section>
+
+<div id="dayDetailView" class="glass-card day-details">
+    <h3>Select a day to view neural activity</h3>
+</div>
+
+       
+    </main>
+
+    <div id="dayModal" class="modal-overlay">
+        <div class="modal-content glass-module">
+            <h3 id="modalDate">Date</h3>
+            <div class="modal-body">
+                <div class="stat"><span>Focus Time:</span> <strong id="modalFocus">0</strong></div>
+                
+                <div class="stat"><span>Efficiency:</span> <strong id="modalEff">0%</strong></div>
+            </div>
+            <button onclick="closeModal()" class="primary-button">Close</button>
+        </div>
+    </div>
+
+    <script src="../js/storage.js"></script>
+    <script src="../js/calendar.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
